@@ -1,0 +1,25 @@
+# 🔒 Environment files
+.env
+.env.local
+.env.development
+.env.production
+
+# 🔑 Sensitive JSON files
+config.json
+secret.json
+api_keys.json
+
+# 📦 Node modules (keep package.json!)
+node_modules/
+
+# 🧪 Logs
+logs/
+*.log
+
+# 🚫 System files
+.DS_Store
+Thumbs.db
+
+# 💻 IDE files
+.vscode/
+.idea/

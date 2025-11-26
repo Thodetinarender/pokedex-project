@@ -1,0 +1,206 @@
+/* ===== GLOBAL THEME ===== */
+body {
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  color: #343a40;
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+header h1 {
+  font-weight: bold;
+  color: #ff3e3e;
+  text-shadow: 2px 2px 8px rgba(255, 62, 62, 0.4);
+}
+.input-group-lg input {
+  border-radius: 0;
+  font-size: 1.1rem;
+}
+.input-group-lg button {
+  background: #ff6767;
+  border: none;
+}
+.input-group-lg button:hover {
+  background: #ff3e3e;
+}
+
+/* ===== CARD STYLE ===== */
+.pokemon-card {
+  transition: transform 0.3s ease, box-shadow 0.3s;
+  background-color: white !important;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+}
+.badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+
+.pokemon-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform .25s, box-shadow .25s;
+}
+.pokemon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(255, 73, 73, 0.3);
+}
+
+.pokemon-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 16px rgba(255, 73, 73, 0.25);
+}
+.card-title {
+  font-size: 1.15rem;
+  color: #ff3e3e;
+}
+.card-footer {
+  background: #fafafa;
+}
+.sprite {
+  height: 160px !important;
+  object-fit: contain;
+}
+
+/* ===== TYPE COLORS ===== */
+.badge {
+  margin-right: 4px;
+  padding: 6px 10px;
+  font-size: 0.75rem;
+}
+.badge.fire { background: #ff5733; }
+.badge.water { background: #3498db; }
+.badge.grass { background: #2ecc71; }
+.badge.electric { background: #f1c40f; color: black; }
+.badge.normal { background: #b0bec5; color: black; }
+.badge.ice { background: #74b9ff; }
+.badge.poison { background: #9b59b6; }
+.badge.flying { background: #a29bfe; }
+.badge.ground { background: #d4a76a; }
+.badge.fairy { background: #ff99d6; }
+.badge.dark { background: #6d6d6d; }
+.badge.steel { background: #95a5a6; }
+.badge.psychic { background: #e84393; }
+.badge.dragon { background: #6c5ce7; }
+
+/* ===== FAVORITES BUTTON ===== */
+.btn-fav {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 1.2rem;
+  transition: 0.25s ease-in-out;
+  border: none;
+  background: #ffdddd;
+}
+.btn-fav:hover {
+  transform: scale(1.2);
+  background: #ffbbbb;
+}
+
+/* ===== MODAL ===== */
+.modal-content {
+  background-color: #ffffff !important;
+  border: 2px solid #ff3e3e;
+}
+.modal-header {
+  background: #ff3e3e;
+  color: white;
+}
+.modal-body {
+  color: #333;
+}
+
+/* ===== STAT ROW ===== */
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding: 6px 0;
+}
+.stat-row div:first-child {
+  font-weight: bold;
+}
+
+
+/* Single Search Result */
+.pokemon-search-card {
+  max-width: 420px;
+  background: linear-gradient(135deg, #ffe5e5, #ffffff);
+  border: 2px solid #ff4d4d;
+  backdrop-filter: blur(6px);
+  animation: fadeInCard 0.4s ease-in-out;
+}
+
+/* Nice Animation */
+@keyframes fadeInCard {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Strong Title */
+.pokemon-search-card .card-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #ff4d4d;
+  letter-spacing: 1px;
+}
+
+/* Center Image */
+.pokemon-search-card img.sprite {
+  display: block;
+  margin: 0 auto;
+  max-height: 180px !important;
+}
+
+/* Fancier Type Badges */
+.pokemon-search-card .badge {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+#searchBox {
+  border-radius: 30px;
+  border: 2px solid #ff3e3e !important;
+  transition: .3s !important;
+}
+
+#searchBox:focus {
+  box-shadow: 0 0 10px rgba(255, 62, 62, 0.5) !important;
+  border-color: #ff1a1a !important;
+}
+
+#searchBtn {
+  border-radius: 30px;
+}
+.pokemon-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 20px rgba(255, 80, 80, 0.4);
+}
+@keyframes searchFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pokemon-search-card {
+  animation: searchFadeIn .5s ease-in-out forwards;
+}

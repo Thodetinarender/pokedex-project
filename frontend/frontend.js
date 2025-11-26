@@ -1,6 +1,5 @@
-// Frontend logic for simple Pokédex (plain JS + Bootstrap)
-let allPokemons = [];   // store whole fetched list
-let itemsPerPage = 10;  // show how many per page
+let allPokemons = [];   
+let itemsPerPage = 10; 
 
 
 function normalizePokemon(p) {
@@ -33,9 +32,8 @@ function normalizePokemon(p) {
 }
 
 (function () {
-  const API_BASE = '';   // same-origin backend
+  const API_BASE = '';  
 
-  // ❤️ FAVORITE SYSTEM (LOCALSTORAGE)
   const FAV_KEY = 'pokedex_favorites_v1';
 
   function getFavorites() {
@@ -74,7 +72,7 @@ function normalizePokemon(p) {
   const modalEl = document.getElementById('pokemonModal');
   const modalName = document.getElementById('modalName');
   const modalDetails = document.getElementById('modalDetails');
-  const showFavBtn = document.getElementById('showFavBtn');  // NEW BUTTON
+  const showFavBtn = document.getElementById('showFavBtn'); 
 
   const recentKey = 'pokedex_recent_searches_v1';
   const typesStatic = [
@@ -119,7 +117,6 @@ function normalizePokemon(p) {
 }
 
 
-  // RECENT SEARCHES
   function loadRecent() {
     try {
       const raw = localStorage.getItem(recentKey);
@@ -145,7 +142,6 @@ function normalizePokemon(p) {
     });
   }
 
-  // FETCH FULL DETAILS WHEN CLICK VIEW DETAILS
   async function showDetailsFromSummary(name) {
     try {
       modalName.textContent = `Loading ${name}...`;
@@ -160,7 +156,6 @@ function normalizePokemon(p) {
     }
   }
 
-  // CARD RENDERING (FAVORITE ADDED HERE)
  function makeCard(pokemonSummary) {
   const name = pokemonSummary.name;
   const col = document.createElement('div');
@@ -190,7 +185,6 @@ function normalizePokemon(p) {
     typesWrap.appendChild(span);
   });
 
-  // ⭐ ADD FAVORITE BUTTON
   const favBtn = document.createElement('button');
   favBtn.className = 'btn btn-outline-danger btn-sm ms-2';
   favBtn.innerHTML = isFavorite(pokemonSummary.id) ? '❤️' : '🤍'; 
@@ -208,7 +202,7 @@ function normalizePokemon(p) {
   body.appendChild(typesWrap);
 
   footer.appendChild(btn);
-  footer.appendChild(favBtn);  // ⭐ ADD HERE
+  footer.appendChild(favBtn); 
 
   card.appendChild(img);
   card.appendChild(body);
@@ -220,15 +214,15 @@ function normalizePokemon(p) {
 
 
   function renderSingle(pokemon) {
-  singleResult.innerHTML = '';   // Clear old
+  singleResult.innerHTML = ''; 
   const wrapper = document.createElement('div');
   wrapper.className = 'pokemon-search-card mx-auto shadow-lg p-4 rounded-4';
 
-  const card = makeCard(pokemon);   // creates DOM element WITH events
+  const card = makeCard(pokemon); 
   wrapper.appendChild(card);
   singleResult.appendChild(wrapper);
 
-  pokemonGrid.innerHTML = ''; // Hide list
+  pokemonGrid.innerHTML = ''; 
 }
 
 
@@ -249,13 +243,11 @@ function normalizePokemon(p) {
   const p = normalizePokemon(pokemon);
 
   modalName.textContent = `${p.name} (#${p.id})`;
-
-  // ⭐ Conditionally styled progress bar for stats
   const statsHTML = (p.stats || []).map(s => {
     const val = s.base_stat;
-    let color = "bg-danger";   // < 50
-    if (val > 75) color = "bg-success";     // > 75
-    else if (val >= 50) color = "bg-warning"; // 50–75
+    let color = "bg-danger";  
+    if (val > 75) color = "bg-success";     
+    else if (val >= 50) color = "bg-warning"; 
 
     return `
       <div class="mb-2">
@@ -311,45 +303,28 @@ function normalizePokemon(p) {
     return res.data;
   }
 
-  // async function doSearch(term) {
-  //   if (!term) return;
-  //   showLoading(singleResult);
-  //   try {
-  //     const res = await fetchPokemonByName(term);
-  //     renderSingle(normalizePokemon(res));
-  //     saveRecent(term);
-  //   } catch {
-  //     singleResult.innerHTML = `<div class="alert alert-warning">Not found</div>`;
-  //   }
-  // }
 
   async function doSearch(term) {
   if (!term) return;
 
   showLoading(singleResult);
-  clearUI();  // <--- NEW (clear old content)
-
+  clearUI();  
   try {
-    // 1️⃣ Try exact match first
     const res = await fetchPokemonByName(term);
     renderSingle(normalizePokemon(res));
     saveRecent(term);
   } catch {
-    // 2️⃣ If exact not found → do partial search
     await searchPartial(term.toLowerCase());
   }
 }
 
 async function searchPartial(term) {
   showLoading(pokemonGrid);
-
-  // if list not loaded yet → fetch all
   if (allPokemons.length === 0) {
     const res = await fetchPokemonList(1400, 0, '');
     allPokemons = res.data.map(normalizePokemon);
   }
 
-  // filter by starting letters
   const results = allPokemons.filter(p => p.name.startsWith(term));
 
   if (results.length === 0) {
@@ -357,7 +332,7 @@ async function searchPartial(term) {
     return;
   }
 
-  renderGrid(results.slice(0, 20));  // show first 20 matches
+  renderGrid(results.slice(0, 20));
 }
 
 searchBox.addEventListener('keyup', debounce(() => {
@@ -371,9 +346,8 @@ async function doFetchList(page = 1) {
   const offset = 0;
   const type = typeFilter.value;
 
-  // ⬇️ If type selected → request more Pokémon
   if (type) {
-    limit = 1000;  // fetch all Pokémon once
+    limit = 1000; 
   }
 
   showLoading(pokemonGrid);
@@ -389,7 +363,7 @@ async function doFetchList(page = 1) {
     return;
   }
 
-  const itemsPerPage = 20; // STILL PAGINATE AFTER FETCH
+  const itemsPerPage = 20; 
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const selectedPageData = allPokemons.slice(startIndex, endIndex);
@@ -417,7 +391,6 @@ function renderPagination(currentPage, totalPages) {
     return button;
   };
 
-  // 🔹 PREVIOUS BUTTON
   if (currentPage > 1) {
     pagination.appendChild(createButton("Prev", currentPage - 1));
   }
@@ -455,7 +428,6 @@ function renderPagination(currentPage, totalPages) {
     container.innerHTML = `<div class="d-flex justify-content-center py-4"><div class="spinner-border"></div></div>`;
   }
 
-  // SHOW ❤️ FAVORITES PAGE
   async function showFavorites() {
     const favIds = getFavorites();
     const list = [];
@@ -466,8 +438,6 @@ function renderPagination(currentPage, totalPages) {
     renderGrid(list);
   }
 
-  // UI Events
-  const debouncedSearch = debounce(() => doSearch(searchBox.value.trim()), 350);
   searchBtn.addEventListener('click', () => doSearch(searchBox.value.trim()));
   typeFilter.addEventListener('change', () => { doFetchList(1); });
 
@@ -478,7 +448,6 @@ function clearUI() {
   recentContainer.style.display = "none";
 }
 
-// UI EVENTS
 fetchAllBtn.addEventListener('click', () => {
   clearUI();
   doFetchList(1);
